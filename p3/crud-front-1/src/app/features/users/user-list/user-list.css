@@ -1,0 +1,41 @@
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  padding: 16px;
+  margin-bottom: 12px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.user-info h3 {
+  margin: 0;
+}
+
+.user-info p {
+  margin: 4px 0 0;
+  color: #777;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
