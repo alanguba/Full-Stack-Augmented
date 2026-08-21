@@ -1,0 +1,70 @@
+<mat-card class="card" appearance="outlined">
+  <mat-card-content>
+    <div class="header">
+      <div>
+        <h3>Mapa</h3>
+        <p class="muted">
+          Haz click en un lugar del mapa para agregarlo.
+          @if (destination) {
+            <span
+              >Destino: <b>{{ destination.label }}</b></span
+            >
+          }
+        </p>
+      </div>
+
+      @if (loading) {
+        <div class="status">
+          <mat-icon>hourglass_top</mat-icon>
+          <span>Cargando...</span>
+        </div>
+      }
+    </div>
+
+    @if (error) {
+      <div class="error">⚠️ {{ error }}</div>
+    }
+
+    <google-map
+      class="map"
+      height="360px"
+      width="100%"
+      [center]="destination?.center || { lat: 51.5074, lng: -0.1278 }"
+      [zoom]="zoom"
+      [options]="options"
+      (mapClick)="onMapClick($event)"
+    >
+      <!-- Markers de lugares seleccionados -->
+      @for (p of selectedPlaces; track $index) {
+        <map-marker [position]="{ lat: p.lat, lng: p.lng }" [title]="p.name"></map-marker>
+      }
+
+      @if (destination == null) {
+        <div class="map-overlay">
+          <span>Selecciona primero un país</span>
+        </div>
+      }
+    </google-map>
+
+    <!-- Panel de resultados Nearby (si el click fue en zona vacía) -->
+    @if (nearbyResults.length > 0) {
+      <div class="nearby">
+        <h4>Resultados cercanos</h4>
+        <mat-list>
+          @for (r of nearbyResults; track $index) {
+            <mat-list-item>
+              <mat-icon matListItemIcon color="primary">place</mat-icon>
+              <div matListItemTitle>{{ r.name }}</div>
+              <div matListItemLine class="muted">{{ r.address || '' }}</div>
+
+              <button mat-stroked-button color="primary" (click)="addNearbyResult(r)">
+                <mat-icon>add</mat-icon>
+                Agregar
+              </button>
+            </mat-list-item>
+          }
+        </mat-list>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

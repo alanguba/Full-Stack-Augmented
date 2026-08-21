@@ -1,0 +1,152 @@
+<div class="page">
+  <!-- Hero / encabezado -->
+  @if (plan) {
+    <mat-card class="hero-card" appearance="outlined">
+      <div class="hero-image">
+        <img
+          [src]="plan.url"
+          [alt]="plan.destination"
+          loading="lazy"
+          (error)="onImageError($event)"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow">Itinerario generado por Itera</p>
+            <h1>{{ plan.name }}</h1>
+            <p class="hero-subtitle">
+              Un plan pensado para aprovechar mejor tu tiempo y recorrer
+              {{ plan.destination }} de manera organizada.
+            </p>
+          </div>
+
+          <div class="hero-actions">
+            <button mat-stroked-button color="primary" (click)="goToItinerariosLista()">
+              <mat-icon>arrow_back</mat-icon>
+              Volver
+            </button>
+          </div>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-pill">
+            <mat-icon>place</mat-icon>
+            <div>
+              <span class="label">Destino</span>
+              <strong>{{ plan.destination }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-pill">
+            <mat-icon>calendar_today</mat-icon>
+            <div>
+              <span class="label">Duración</span>
+              <strong>{{ plan.days }} día(s)</strong>
+            </div>
+          </div>
+
+          <div class="summary-pill">
+            <mat-icon>speed</mat-icon>
+            <div>
+              <span class="label">Ritmo</span>
+              <strong>{{ plan.pace }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-pill">
+            <mat-icon>checklist</mat-icon>
+            <div>
+              <span class="label">Lugares</span>
+              <strong>{{ plan.lugares.length }} seleccionados</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  }
+
+  <!-- Layout principal -->
+  @if (plan) {
+    <div class="content-grid">
+      <!-- Columna izquierda: lugares -->
+      <section class="left-column">
+        <mat-card class="section-card" appearance="outlined">
+          <mat-card-content>
+            <div class="section-header">
+              <div>
+                <h2>Lugares incluidos</h2>
+                <p class="muted">
+                  Estos son los lugares considerados para construir el itinerario.
+                </p>
+              </div>
+
+              <mat-chip-set>
+                <mat-chip color="primary" selected>Solo lectura</mat-chip>
+              </mat-chip-set>
+            </div>
+
+            <mat-divider class="divider"></mat-divider>
+
+            <mat-list class="lugares-list">
+              <mat-list-item *ngFor="let lugar of plan.lugares">
+                <mat-icon matListItemIcon color="primary">place</mat-icon>
+
+                <div matListItemTitle class="lugar-title">
+                  {{ lugar.name }}
+                  <span class="category-pill">{{ lugar.category }}</span>
+                </div>
+
+                <div matListItemLine class="muted">
+                  {{ lugar.direction }}
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <!-- Columna derecha: días -->
+      <section class="right-column">
+        <div class="days-stack">
+          <mat-card class="day-card" appearance="outlined" *ngFor="let day of plan.itinerary">
+            <mat-card-content>
+              <div class="day-header">
+                <div class="day-badge">Día {{ day.day }}</div>
+
+                <div>
+                  <h2>{{ day.title }}</h2>
+                  <p class="muted">{{ day.summary }}</p>
+                </div>
+              </div>
+
+              <mat-divider class="divider"></mat-divider>
+
+              <div class="stops-list">
+                <div class="stop-row" *ngFor="let stop of day.stops; let last = last">
+                  <div class="time-col">
+                    <span class="time">{{ stop.time }}</span>
+                  </div>
+
+                  <div class="timeline-col">
+                    <div class="dot"></div>
+                    <div class="line" *ngIf="!last"></div>
+                  </div>
+
+                  <div class="stop-content">
+                    <div class="stop-text">
+                      <h3>{{ stop.name }}</h3>
+                      <p>{{ stop.note }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
+    </div>
+  }
+</div>

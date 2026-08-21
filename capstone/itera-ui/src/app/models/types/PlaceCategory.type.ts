@@ -1,0 +1,1 @@
+export type PlaceCategory = 'Cultura' | 'Naturaleza' | 'Comida' | 'Aventura' | 'Café' | 'Compras';

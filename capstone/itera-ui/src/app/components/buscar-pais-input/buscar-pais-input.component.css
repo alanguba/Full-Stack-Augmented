@@ -1,0 +1,50 @@
+.muted { color: rgba(0,0,0,.66); }
+.w-100 { width: 100%; }
+
+.card {
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+/* Card headers */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card-header h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.header-icon {
+  color: rgba(46,125,50,.9);
+}
+
+.hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: rgba(0,0,0,.58);
+}
+
+.row {
+  margin-top: 10px;
+}
+.row.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Hover micro-interactions */
+.card {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}

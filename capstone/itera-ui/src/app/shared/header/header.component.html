@@ -1,0 +1,57 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <!-- Botón menú (mobile) -->
+  <button mat-icon-button class="mobile-only" aria-label="Abrir menú" (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Branding -->
+  <div class="brand" (click)="goHome()" role="button" tabindex="0">
+    <mat-icon class="brand-icon">travel_explore</mat-icon>
+
+    <span class="brand-title-wrap">
+      <span class="brand-title">{{ title }}</span>
+
+      <!-- Avión animado -->
+      <span class="plane-lane" aria-hidden="true">
+        <mat-icon class="plane">flight</mat-icon>
+      </span>
+    </span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <nav class="desktop-only nav-links" aria-label="Navegación principal">
+    <a mat-button class="nav-button" (click)="goTo('/home/inicio')" routerLinkActive="active"
+      >Inicio</a
+    >
+    <a mat-button class="nav-button" (click)="goTo('/home/planes')" routerLinkActive="active"
+      >Crear plan</a
+    >
+    <a
+      mat-button
+      class="nav-button"
+      (click)="goTo('/home/mis-itinerarios')"
+      routerLinkActive="active"
+      >Mis itinerarios</a
+    >
+  </nav>
+
+  <!-- Menú de usuario -->
+  <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="Abrir menú usuario">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+    @if (hasRole('ROLE_ADMINISTRADOR')) {
+      <button mat-menu-item (click)="goTo('/home/configuracion')">
+        <mat-icon>settings</mat-icon>
+        <span>Configuración</span>
+      </button>
+    }
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Salir</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

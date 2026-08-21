@@ -1,0 +1,47 @@
+
+
+.muted { color: rgba(0,0,0,.66); }
+.small { font-size: 12px; }
+.w-100 { width: 100%; }
+
+.card {
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+/* Sections */
+.section-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+.section-title p {
+  margin: 4px 0 0;
+}
+
+.section-title.inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.divider { margin: 12px 0; }
+
+.row {
+  margin-top: 10px;
+}
+.row.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Hover micro-interactions */
+.card {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}

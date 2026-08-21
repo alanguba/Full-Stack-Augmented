@@ -1,0 +1,99 @@
+@if (isLoading) {
+  <div class="loading-state">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p>Cargando itinerarios...</p>
+  </div>
+} @else {
+  <div class="page">
+    <!-- Header -->
+    <div class="topbar">
+      <div class="title-wrap">
+        <div class="icon-badge">
+          <mat-icon>travel_explore</mat-icon>
+        </div>
+        <div>
+          <h1>Mis Itinerarios</h1>
+          <p class="muted">Consulta tus viajes generados y retómalos cuando quieras.</p>
+        </div>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="goTo('/home/planes')">
+        <mat-icon>add</mat-icon>
+        Nuevo itinerario
+      </button>
+    </div>
+
+    <!-- Search -->
+    @if (error) {
+      <div class="error-state">
+        <mat-icon>error_outline</mat-icon>
+        <h2>Error al cargar itinerarios</h2>
+        <p class="muted">Intenta recargar la página o vuelve más tarde.</p>
+      </div>
+    }
+    @if (error === null) {
+      <mat-card class="search-card" appearance="outlined">
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Buscar itinerario</mat-label>
+            <input
+              matInput
+              [formControl]="searchCtrl"
+              placeholder="Ej. Londres, Roma, cultural..."
+            />
+            @if (searchCtrl.value) {
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="searchCtrl.setValue('')"
+                aria-label="Limpiar búsqueda"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+
+            @if (!searchCtrl.value) {
+              <mat-icon matSuffix>search</mat-icon>
+            }
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <!-- Empty state -->
+    @if (error === null && filteredItineraries.length === 0) {
+      <div class="empty-state">
+        <mat-icon>folder_off</mat-icon>
+        <h2>No se encontraron itinerarios</h2>
+        <p class="muted">Intenta con otro texto de búsqueda.</p>
+      </div>
+    }
+
+    <!-- Grid -->
+    @if (error === null && filteredItineraries.length > 0) {
+      <div class="grid">
+        @for (item of paginatedItineraries; track $index) {
+          <app-destino-card [item]="item"></app-destino-card>
+        }
+      </div>
+    }
+
+    <!-- Pagination -->
+    @if (error === null && filteredItineraries.length > 0) {
+      <mat-card class="pagination-card" appearance="outlined">
+        <mat-card-content>
+          <mat-paginator
+            [length]="filteredItineraries.length"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="[3, 6, 9, 12]"
+            (page)="onPageChange($event)"
+            showFirstLastButtons
+          >
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}

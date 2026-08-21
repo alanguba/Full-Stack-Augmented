@@ -1,0 +1,55 @@
+<mat-card class="card" appearance="outlined">
+        <mat-card-content>
+          <div class="section-title">
+            <h3>Datos del viaje</h3>
+            <p class="muted">Esto le da contexto a tu itinerario.</p>
+          </div>
+
+          <div class="row two">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Días disponibles</mat-label>
+              <mat-select [formControl]="daysControl">
+                @for (d of daysOptions; track $index) {
+                  <mat-option [value]="d">{{ d }} día(s)</mat-option>
+                }
+              </mat-select>
+              <mat-icon matSuffix>event</mat-icon>
+            </mat-form-field>
+
+            <div class="pace">
+              <label class="pace-label">Ritmo</label>
+              <mat-button-toggle-group [formControl]="paceControl" class="pace-toggle" appearance="legacy">
+                <mat-button-toggle value="Relajado">Relajado</mat-button-toggle>
+                <mat-button-toggle value="Balanceado">Balanceado</mat-button-toggle>
+                <mat-button-toggle value="Intenso">Intenso</mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="summary-item">
+              <mat-icon color="primary">calendar_today</mat-icon>
+              <div>
+                <div class="summary-title">{{ daysControl.value }} día(s)</div>
+                <div class="muted small">Duración del viaje</div>
+              </div>
+            </div>
+
+            <div class="summary-item">
+              <mat-icon color="primary">speed</mat-icon>
+              <div>
+                <div class="summary-title">{{ paceControl.value }}</div>
+                <div class="muted small">Ritmo sugerido</div>
+              </div>
+            </div>
+
+            <div class="summary-item">
+              <mat-icon color="primary">list_alt</mat-icon>
+              <div>
+                <div class="summary-title">{{ selected.length }} lugares</div>
+                <div class="muted small">Selección actual</div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>

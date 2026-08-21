@@ -1,0 +1,49 @@
+<mat-card class="card" appearance="outlined">
+        <mat-card-content>
+          <div class="section-title inline">
+            <div>
+              <h3>Tu lista</h3>
+              <p class="muted">Lugares seleccionados ({{ selected.length }})</p>
+            </div>
+
+            <span class="pill" [class.ok]="selected.length >= 2" [class.warn]="selected.length < 2">
+              <mat-icon>{{ selected.length >= 2 ? 'check' : 'info' }}</mat-icon>
+              {{ selected.length >= 2 ? 'Listo' : 'Agrega al menos 2' }}
+            </span>
+          </div>
+
+          <mat-divider class="divider"></mat-divider>
+
+          @if (selected.length === 0) {
+            <div class="empty">
+              <mat-icon>playlist_add</mat-icon>
+              <p>No has agregado lugares aún.</p>
+              <p class="muted">Busca y presiona “Agregar”.</p>
+            </div>
+          }
+
+          @if (selected.length > 0) {
+            <mat-list class="selected">
+              @for (place of selected; track $index) {
+                <mat-list-item>
+                  <mat-icon matListItemIcon color="primary">{{ place.icon }}</mat-icon>
+
+                  <div matListItemTitle class="place-title">
+                    {{ place.name }}
+                    <span class="badge">{{ place.category }}</span>
+                  </div>
+                  <div matListItemLine class="muted address-line">{{ place.address }}</div>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    aria-label="Quitar"
+                    (click)="removePlace(place)"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-list-item>
+              }
+            </mat-list>
+          }
+        </mat-card-content>
+      </mat-card>

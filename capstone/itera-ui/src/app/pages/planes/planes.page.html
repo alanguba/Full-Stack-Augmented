@@ -1,0 +1,100 @@
+<div class="page">
+  <!-- Barra de progreso / contexto -->
+  <div class="topbar">
+    <div class="progress">
+      <div class="step active">
+        <mat-icon>check_circle</mat-icon>
+        <span>Planes</span>
+      </div>
+
+      <div class="connector"></div>
+
+      <div class="step">
+        <mat-icon>map</mat-icon>
+        <span>Itinerario</span>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="clearAll()"
+        [disabled]="selected.length === 0"
+      >
+        <mat-icon>delete</mat-icon>
+        Limpiar selección
+      </button>
+
+      <a
+        mat-raised-button
+        color="primary"
+        [class.disabled]="selected.length === 0"
+        (click)="goToItinerary()"
+      >
+        <mat-icon>flight</mat-icon>
+        Generar itinerario
+      </a>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="grid">
+    <!-- Columna izquierda: búsqueda / resultados -->
+    <section class="left">
+      <!-- Ciudad -->
+      <app-buscar-pais-input
+        (destinationChange)="onDestinationChange($event)"
+        [cityCtrl]="cityCtrl"
+        [citySuggestions$]="citySuggestions$"
+        [displayCity]="displayCity"
+      ></app-buscar-pais-input>
+
+      <!-- Búsqueda + categorías -->
+      <app-busca-lugares-input
+        (placeSelected)="onPlaceSelected($event)"
+        [destination]="destination"
+        [placeCtrl]="placeCtrl"
+        [placeSuggestions$]="placeSuggestions$"
+        [loadingSuggestions]="loadingSuggestions"
+        [placesError]="placesError"
+        [displaySuggestion]="displaySuggestion"
+      ></app-busca-lugares-input>
+
+      <!-- Mapa placeholder -->
+      <app-mapa
+        [destination]="destination"
+        [selectedPlaces]="selected"
+        (placeAdded)="addPlace($event)"
+        [nearbyPrimaryTypes]="['tourist_attraction', 'museum', 'restaurant', 'park', 'cafe']"
+      ></app-mapa>
+    </section>
+
+    <!-- Columna derecha: selección + datos de viaje + mapa -->
+    <section class="right">
+      <!-- Seleccionados -->
+      <app-lista-lugares [(selected)]="selected"></app-lista-lugares>
+      <!-- Datos del viaje -->
+      <app-datos-viaje [selected]="selected" [daysControl]="daysControl" [paceControl]="paceControl"></app-datos-viaje>
+
+      <!-- CTA final (mobile friendly) -->
+      <div class="bottom-cta">
+        <a
+          mat-raised-button
+          color="primary"
+          class="cta"
+          routerLink="/itinerario"
+          [class.disabled]="selected.length === 0"
+          (click)="goToItinerary()"
+          [disabled]="!destination || selected.length === 0"
+        >
+          <mat-icon>flight</mat-icon>
+          Generar itinerario
+        </a>
+        @if (selected.length === 0) {
+          <p class="muted small">Agrega al menos un lugar para continuar.</p>
+        }
+      </div>
+    </section>
+  </div>
+</div>

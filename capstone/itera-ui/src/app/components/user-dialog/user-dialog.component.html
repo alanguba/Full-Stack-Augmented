@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>
+  {{ data?.mode === 'create' ? 'Nuevo usuario' : 'Editar usuario' }}
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="user-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="form.controls.nombre.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.controls.nombre.hasError('minlength')">
+        El nombre debe tener al menos 3 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido Paterno</mat-label>
+      <input matInput formControlName="apellidoPaterno" />
+      <mat-error *ngIf="form.controls.apellidoPaterno.hasError('required')">
+        El apellido paterno es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.controls.apellidoPaterno.hasError('minlength')">
+        El apellido paterno debe tener al menos 3 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido Materno</mat-label>
+      <input matInput formControlName="apellidoMaterno" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="correo" />
+      <mat-error *ngIf="form.controls.correo.hasError('required')">
+        El correo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.controls.correo.hasError('email')"> El correo no es válido </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="rol" [compareWith]="compareRoles" [disabled]="isLoadingRoles">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-hint *ngIf="isLoadingRoles">Cargando roles...</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option [value]="1">Habilitado</mat-option>
+        <mat-option [value]="0">Deshabilitado</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()">
+    {{ data?.mode === 'create' ? 'Guardar' : 'Actualizar' }}
+  </button>
+</mat-dialog-actions>

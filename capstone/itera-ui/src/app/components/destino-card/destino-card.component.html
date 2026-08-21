@@ -1,0 +1,54 @@
+<mat-card class="itinerary-card" appearance="outlined">
+  <div class="cover">
+    <img
+      *ngIf="item.url; else placeholderImage"
+      [src]="item.url"
+      [alt]="item.nombre"
+      loading="lazy"
+    />
+    <ng-template #placeholderImage>
+      <div class="cover-placeholder">
+        <mat-icon>image</mat-icon>
+      </div>
+    </ng-template>
+  </div>
+
+  <mat-card-content>
+    <div class="card-top">
+      <div>
+        <h3>{{ item.nombre }}</h3>
+        <p class="muted destination">
+          <mat-icon>place</mat-icon>
+          {{ item.destino }}
+        </p>
+      </div>
+      <span class="pace-pill" [ngClass]="paceLabelClass(item.ritmo)">
+        {{ item.ritmo }}
+      </span>
+    </div>
+
+    <div class="meta">
+      <div class="meta-item">
+        <mat-icon>calendar_today</mat-icon>
+        <span>{{ item.dias }} día(s)</span>
+      </div>
+
+      <div class="meta-item">
+        <mat-icon>checklist</mat-icon>
+        <span>{{ item.lugaresCount }} lugares</span>
+      </div>
+
+      <div class="meta-item">
+        <mat-icon>schedule</mat-icon>
+        <span>{{ item.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-stroked-button color="primary" (click)="goToItinerario(item.id)">
+      <mat-icon>visibility</mat-icon>
+      Ver
+    </button>
+  </mat-card-actions>
+</mat-card>

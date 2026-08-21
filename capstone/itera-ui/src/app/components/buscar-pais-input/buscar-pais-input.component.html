@@ -1,0 +1,54 @@
+<mat-card class="card" appearance="outlined">
+  <mat-card-content>
+    <div class="card-header">
+      <div>
+        <h2>Selecciona tus planes</h2>
+        <p class="muted">Elige lugares que quieras visitar. Itera organizará tu ruta.</p>
+      </div>
+      <mat-icon class="header-icon">travel_explore</mat-icon>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>¿A dónde viajas?</mat-label>
+
+        <input
+          matInput
+          [formControl]="cityCtrl"
+          [matAutocomplete]="cityAuto"
+          placeholder="Ej. Monterrey, NL"
+        />
+
+        <!-- X para limpiar -->
+        @if (destination || (cityCtrl.value && (displayCity(cityCtrl.value) || '').length > 0)) {
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            aria-label="Limpiar destino"
+            (click)="clearDestination()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+
+        <mat-autocomplete
+          #cityAuto="matAutocomplete"
+          [displayWith]="displayCity"
+          (optionSelected)="onCitySelected($event.option.value)"
+          autoActiveFirstOption
+        >
+          <mat-option *ngFor="let s of citySuggestions$ | async" [value]="s">
+            {{ s.text }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      @if (destination) {
+        <div class="hint">
+          ✅ Destino seleccionado: <b>{{ destination.label }}</b>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

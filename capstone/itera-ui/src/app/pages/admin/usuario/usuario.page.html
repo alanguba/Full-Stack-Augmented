@@ -1,0 +1,82 @@
+<mat-card class="users-page">
+  <div class="users-header">
+    <div>
+      <h1>Administración de usuarios</h1>
+      <p>Administra los usuarios registrados en la plataforma.</p>
+    </div>
+
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>person_add</mat-icon>
+      Nuevo usuario
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="(users$ | async) ?? []" class="mat-elevation-z1 full-width-table">
+
+      <!-- Nombre -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let user">{{ user.nombre }}</td>
+      </ng-container>
+
+      <!-- Apellido Paterno -->
+      <ng-container matColumnDef="apellidoPaterno">
+        <th mat-header-cell *matHeaderCellDef>Apellido Paterno</th>
+        <td mat-cell *matCellDef="let user">{{ user.apellidoPaterno }}</td>
+      </ng-container>
+
+      <!-- Apellido Materno -->
+      <ng-container matColumnDef="apellidoMaterno">
+        <th mat-header-cell *matHeaderCellDef>Apellido Materno</th>
+        <td mat-cell *matCellDef="let user">{{ user.apellidoMaterno }}</td>
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Correo</th>
+        <td mat-cell *matCellDef="let user">{{ user.correo }}</td>
+      </ng-container>
+
+      <!-- Rol -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-chip>{{ user.rol.nombre }}</mat-chip>
+        </td>
+      </ng-container>
+
+      <!-- Estado -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let user">
+          <span class="status-badge" [ngClass]="!!user.estado ? 'enabled' : 'disabled'">
+            {{ !!user.estado ? 'Habilitado' : 'Deshabilitado' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let user" class="actions-cell">
+          <button mat-icon-button color="primary" matTooltip="Editar" (click)="openEditDialog(user)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            [color]="!!user.estado ? 'warn' : 'accent'"
+            [matTooltip]="!!user.estado ? 'Deshabilitar' : 'Habilitar'"
+            (click)="toggleStatus(user)">
+            <mat-icon>{{ !!user.estado ? 'block' : 'check_circle' }}</mat-icon>
+          </button>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</mat-card>

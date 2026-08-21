@@ -1,0 +1,48 @@
+<!-- Búsqueda + categorías -->
+<mat-card class="card" appearance="outlined">
+  <mat-card-content>
+    <div class="section-title">
+      <h3>Busca lugares</h3>
+      <p class="muted">Escribe y agrega lugares a tu lista.</p>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Buscar lugares</mat-label>
+
+        <input
+          type="text"
+          matInput
+          [formControl]="placeCtrl"
+          [matAutocomplete]="auto"
+          placeholder="Ej. museo, parque, café..."
+        />
+
+        @if (loadingSuggestions) {
+          <mat-icon matSuffix>hourglass_top</mat-icon>
+        } @else {
+          <mat-icon matSuffix>search</mat-icon>
+        }
+
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          [displayWith]="displaySuggestion"
+          (optionSelected)="onSuggestionSelected($event.option.value)"
+          autoActiveFirstOption
+        >
+          @if (placesError) {
+            <mat-option disabled> ⚠️ {{ placesError }} </mat-option>
+          }
+
+          <mat-option *ngFor="let s of placeSuggestions$ | async" [value]="s">
+            {{ s.text }}
+          </mat-option>
+
+          @if ((placeSuggestions$ | async)?.length === 0 && (placeCtrl.value.length >= 2)) {
+            <mat-option disabled> Sin resultados </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+</mat-card>

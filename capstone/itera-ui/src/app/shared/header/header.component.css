@@ -1,0 +1,162 @@
+.header-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #ffb93d;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.brand-icon {
+  transform: translateY(-1px);
+}
+
+.brand-title {
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 2rem;
+}
+
+.brand-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plane-lane {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+}
+
+.plane {
+  position: absolute;
+
+  /* Ahora inicia fuera a la izquierda */
+  left: -26px;
+
+  color: #13361a;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+
+  /* Girar 90 grados */
+  transform: rotate(90deg);
+
+  /* Animación izquierda -> derecha */
+  animation: fly-ltr 1.6s linear infinite;
+  will-change: transform;
+  opacity: 0.95;
+}
+
+@keyframes fly-ltr {
+  0% {
+    transform: translateX(0) rotate(90deg);
+  }
+  100% {
+    transform: translateX(80px) rotate(90deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plane {
+    animation: none;
+    right: 0;
+    position: static;
+    opacity: 1;
+  }
+  .plane-lane {
+    overflow: visible;
+  }
+}
+
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .plane {
+    animation: none;
+    position: static;
+    transform: rotate(90deg);
+    opacity: 1;
+  }
+  .plane-lane {
+    overflow: visible;
+  }
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links a.active {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.search {
+  width: 320px;
+  margin-right: 8px;
+}
+
+.sidenav-container {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 64px);
+  z-index: 999;
+}
+
+.sidenav {
+  width: 280px;
+}
+
+/* Responsive */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: inline-flex;
+  }
+
+  .sidenav-container {
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+}
+
+.nav-button {
+  background-color: #13361a;
+  color: #ffffff !important;
+  border-radius: 20px;
+  margin-right: 8px;
+  padding: 6px 18px;
+  font-weight: 500;
+  text-transform: none;
+
+  &:hover {
+    background-color: #18241a;
+  }
+}

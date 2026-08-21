@@ -1,0 +1,76 @@
+
+.muted { color: rgba(0,0,0,.66); }
+.address-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card {
+  border-radius: 16px;
+  margin-bottom: 14px;
+  max-width: 500px;
+}
+.hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: rgba(0,0,0,.58);
+}
+
+/* Sections */
+.section-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+.section-title p {
+  margin: 4px 0 0;
+}
+
+.section-title.inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.divider { margin: 12px 0; }
+
+/* Empty state */
+.empty {
+  text-align: center;
+  padding: 16px 10px;
+}
+.empty mat-icon {
+  font-size: 34px;
+  width: 34px;
+  height: 34px;
+  opacity: 0.7;
+}
+
+/* Pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(0,0,0,0.05);
+}
+.pill.ok { background: rgba(46,125,50,0.12); color: #2e7d32; }
+.pill.warn { background: rgba(255,152,0,0.15); color: #9a5b00; }
+.pill mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Hover micro-interactions */
+.card {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}

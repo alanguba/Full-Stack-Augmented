@@ -1,0 +1,180 @@
+<div class="page">
+  <!-- Header -->
+  <div class="topbar">
+    <div class="title">
+      <div class="badge">
+        <mat-icon>map</mat-icon>
+      </div>
+      <div>
+        <h1>Tu Itinerario</h1>
+        <p class="muted">Generado con base en tus planes y tu tiempo disponible.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-stroked-button color="primary" (click)="backToPlans()">
+        <mat-icon>arrow_back</mat-icon>
+        Volver a Planes
+      </button>
+
+      <button mat-raised-button color="primary" (click)="savePlan()">
+        <mat-icon>save_alt</mat-icon>
+        Guardar Itinerario
+      </button>
+    </div>
+  </div>
+
+  <!-- Resumen del input -->
+  <div class="summary-grid">
+    <mat-card class="summary-card" appearance="outlined">
+      <mat-card-content>
+        <div class="summary-item">
+          <mat-icon color="primary">place</mat-icon>
+          <div>
+            <div class="kicker">Destino</div>
+            <div class="value">{{ planInput.destination }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card" appearance="outlined">
+      <mat-card-content>
+        <div class="summary-item">
+          <mat-icon color="primary">calendar_today</mat-icon>
+          <div>
+            <div class="kicker">Días</div>
+            <div class="value">{{ planInput.days }} día(s)</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card" appearance="outlined">
+      <mat-card-content>
+        <div class="summary-item">
+          <mat-icon color="primary">speed</mat-icon>
+          <div>
+            <div class="kicker">Ritmo</div>
+            <div class="value">{{ planInput.pace }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card" appearance="outlined">
+      <mat-card-content>
+        <div class="summary-item">
+          <mat-icon color="primary">checklist</mat-icon>
+          <div>
+            <div class="kicker">Lugares</div>
+            <div class="value">{{ planInput.places.length }} seleccionados</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Lista de lugares seleccionados -->
+  <mat-card class="places-card" appearance="outlined">
+    <mat-card-content>
+      <div class="section-header">
+        <div>
+          <h2>Lugares seleccionados</h2>
+          <p class="muted">Esto es lo que Itera usará para crear tu recorrido.</p>
+        </div>
+
+        <mat-chip-set>
+          <mat-chip color="primary" selected>Destino listo</mat-chip>
+          <mat-chip color="primary" selected>Días definidos</mat-chip>
+          <mat-chip color="primary" selected>Ritmo: {{ planInput.pace }}</mat-chip>
+        </mat-chip-set>
+      </div>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <mat-list class="places-list">
+        <mat-list-item *ngFor="let p of planInput.places">
+          <div matListItemTitle class="place-title">
+            {{ p.name }}
+            <span class="pill">{{ p.category }}</span>
+          </div>
+          <div matListItemLine class="muted">{{ p.address }}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading mientras IA genera -->
+  @if (isLoading) {
+    <mat-card class="loading-card" appearance="outlined">
+      <mat-card-content>
+        <div class="loading-wrap">
+          <!-- Imagen / Ilustración de carga (puedes cambiar por tu propia imagen) -->
+          <div class="loading-illustration" aria-hidden="true">
+            <!-- Puedes reemplazar esto por assets/loading-itinerary.png -->
+            <div class="spinner-plane"></div>
+            <div class="dots"><span></span><span></span><span></span></div>
+          </div>
+
+          <div class="loading-text">
+            <h2>Generando tu itinerario…</h2>
+            <p class="muted">
+              Estamos organizando tus lugares en {{ planInput.days }} día(s) con ritmo
+              <b>{{ planInput.pace }}</b
+              >.
+            </p>
+
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+            <div class="loading-tips">
+              <mat-icon color="primary">lightbulb</mat-icon>
+              <span class="muted">Tip: podrás regenerar y ajustar el orden después.</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  @if (!isLoading) {
+    <div class="itinerary">
+      <div class="itinerary-header">
+        <h2>Itinerario sugerido</h2>
+      </div>
+
+      <div class="days-grid">
+        <mat-card class="day-card" appearance="outlined" *ngFor="let d of result?.itinerary">
+          <mat-card-content>
+            <div class="day-top">
+              <div class="day-badge">Día {{ d.day }}</div>
+              <div class="day-meta">
+                <div class="day-title">{{ d.title }}</div>
+                <div class="muted small">{{ d.summary }}</div>
+              </div>
+            </div>
+
+            <mat-divider class="divider"></mat-divider>
+
+            <div class="stops">
+              <div class="stop" *ngFor="let s of d.stops; let idx = index">
+                <div class="time">{{ s.time }}</div>
+                <div class="line">
+                  <div class="dot"></div>
+                  <div class="bar" *ngIf="idx < d.stops.length - 1"></div>
+                </div>
+                <div class="content">
+                  <div class="stop-title">
+                    <span>{{ s.name }}</span>
+                  </div>
+                  <div class="muted small">{{ s.note }}</div>
+                </div>
+              </div>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+</div>

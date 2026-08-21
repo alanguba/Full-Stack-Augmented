@@ -1,0 +1,8 @@
+
+<div class="login-shell">
+  @if(toogleHandler) {
+    <app-login-forgot-password [toogleHandler]="toggle"></app-login-forgot-password>
+  } @else {
+    <app-login-classic [toogleHandler]="toggle"></app-login-classic>
+  }
+</div>

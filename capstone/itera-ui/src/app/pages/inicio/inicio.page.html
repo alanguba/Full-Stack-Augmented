@@ -1,0 +1,176 @@
+<div class="page" animate.enter="page-enter">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <mat-chip-set class="hero-badges" aria-label="Badges">
+        <mat-chip color="primary" selected>Turistas casuales</mat-chip>
+        <mat-chip color="primary" selected>Rutas optimizadas</mat-chip>
+        <mat-chip color="primary" selected>En minutos</mat-chip>
+      </mat-chip-set>
+
+      <h1 class="hero-title">
+        Planifica tu viaje sin complicaciones con <span class="accent">Itera</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Selecciona lugares, dime cuántos días tienes y recibe un itinerario organizado día por día.
+      </p>
+
+      <div class="hero-actions">
+        <a mat-raised-button color="primary" class="cta" (click)="goToPlanes()">
+          <mat-icon>rocket_launch</mat-icon>
+          Crear mi itinerario
+        </a>
+      </div>
+
+      <p class="hero-hint">
+        ✨ Tip: Empieza por <b>Planes</b> para elegir destinos.
+      </p>
+    </div>
+
+    <!-- Panel visual (mock) -->
+    <mat-card class="hero-preview" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Vista rápida</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="preview-row">
+          <mat-icon color="primary">calendar_today</mat-icon>
+          <div>
+            <div class="preview-title">3 días en Monterrey</div>
+            <div class="preview-sub">Cultural + panorámico</div>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="preview-day">
+          <div class="day-tag">Día 1</div>
+          <div class="day-items">
+            <span><mat-icon>place</mat-icon> Macroplaza</span>
+            <span><mat-icon>restaurant</mat-icon> Comida típica</span>
+            <span><mat-icon>museum</mat-icon> Museo</span>
+          </div>
+        </div>
+
+        <div class="preview-day">
+          <div class="day-tag">Día 2</div>
+          <div class="day-items">
+            <span><mat-icon>terrain</mat-icon> Mirador</span>
+            <span><mat-icon>park</mat-icon> Parque</span>
+            <span><mat-icon>local_cafe</mat-icon> Café</span>
+          </div>
+        </div>
+
+        <div class="preview-day">
+          <div class="day-tag">Día 3</div>
+          <div class="day-items">
+            <span><mat-icon>shopping_bag</mat-icon> Mercado</span>
+            <span><mat-icon>camera_alt</mat-icon> Fotos</span>
+            <span><mat-icon>flight_takeoff</mat-icon> Regreso</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section">
+    <h2 class="section-title">¿Cómo funciona?</h2>
+    <p class="section-subtitle">En 3 pasos simples.</p>
+
+    <div class="cards">
+      <mat-card class="info-card" animate.enter="card-enter delay-1" appearance="outlined">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>place</mat-icon>
+          </div>
+          <h3>Elige tus destinos</h3>
+          <p>Busca lugares con Google Places y agrega lo que te interesa visitar.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="info-card" animate.enter="card-enter delay-2" appearance="outlined">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>event</mat-icon>
+          </div>
+          <h3>Indica tus días</h3>
+          <p>Define cuántos días tienes y tu estilo de viaje (tranquilo o intenso).</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="info-card" animate.enter="card-enter delay-3" appearance="outlined">
+        <mat-card-content>
+          <div class="card-icon">
+            <mat-icon>map</mat-icon>
+          </div>
+          <h3>Recibe tu itinerario</h3>
+          <p>Itera organiza tus visitas por día para aprovechar mejor tu tiempo.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="section">
+    <h2 class="section-title">¿Por qué usar Itera?</h2>
+    <p class="section-subtitle">Diseñada para turistas casuales: simple, rápida y práctica.</p>
+
+    <mat-card class="benefits" appearance="outlined">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon color="primary">schedule</mat-icon>
+            <div matListItemTitle>Ahorras tiempo</div>
+            <div matListItemLine>Menos planeación, más viaje.</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon color="primary">route</mat-icon>
+            <div matListItemTitle>Rutas más inteligentes</div>
+            <div matListItemLine>Orden sugerido para reducir traslados.</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon color="primary">tune</mat-icon>
+            <div matListItemTitle>Fácil de ajustar</div>
+            <div matListItemLine>Quita o agrega lugares y regenera.</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon color="primary">verified</mat-icon>
+            <div matListItemTitle>Experiencia clara</div>
+            <div matListItemLine>Sin pasos técnicos ni configuraciones raras.</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final-cta">
+    <mat-card class="final-card" appearance="outlined">
+      <mat-card-content>
+        <h2>¿Listo para planear tu próximo viaje?</h2>
+        <p>Empieza seleccionando tus lugares favoritos.</p>
+
+        <a mat-raised-button color="primary" class="cta" (click)="goToPlanes()">
+          <mat-icon>flight</mat-icon>
+          Empezar ahora
+        </a>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- FOOTER (simple) -->
+  <footer class="footer">
+    <span>© {{ currentYear }} Itera</span>
+    <span class="footer-spacer"></span>
+    <a routerLink="/acerca">Acerca de</a>
+    <a routerLink="/contacto">Contacto</a>
+  </footer>
+
+</div>
