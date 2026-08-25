@@ -18,13 +18,13 @@
 ### Reviewer 2
 | Trait | Rating (1-5) | Comments |
 | :--- | :--- | :--- |
-| **Full-Stack Integration**<br>*(Spring Boot + Angular connection, REST standards)* | | |
-| **AI Feature ("The Magic")**<br>*(Effective integration of LLM API for UX value)* | | |
-| **Frontend Architecture**<br>*(Use of `@defer`, Signals, & Component design)* | | |
-| **Testing Strategy**<br>*(Coverage, AI-generated unit tests, TDD evidence)* | | |
-| **Copilot Utilization**<br>*(Refactoring quality, clean code, lack of "boilerplate")* | | |
-| **Dev Environment**<br>*(Reproducibility via `devcontainer.json` & Codespaces)* | | |
-| **Demo & Product Value**<br>*(Does it solve the problem? Is the UX intuitive?)* | | |
+| **Full-Stack Integration**<br>*(Spring Boot + Angular connection, REST standards)* | 5 | the project uses correct REST standards and connects backend and frontend correctly. |
+| **AI Feature ("The Magic")**<br>*(Effective integration of LLM API for UX value)* | 5 | the project implements AI to add value to its bussiness and implements correct practices. |
+| **Frontend Architecture**<br>*(Use of `@defer`, Signals, & Component design)* | 5 | the project use a standar architechture, using standards in angular projects using signals and component design. |
+| **Testing Strategy**<br>*(Coverage, AI-generated unit tests, TDD evidence)* | 5 | the project uses AI generated unit tests and coverage.|
+| **Copilot Utilization**<br>*(Refactoring quality, clean code, lack of "boilerplate")* | 5 | Clean code implemented and AI generated code also used in project. |
+| **Dev Environment**<br>*(Reproducibility via `devcontainer.json` & Codespaces)* | 5 | uses codespaces and devcontainer for reproducibility of the project. |
+| **Demo & Product Value**<br>*(Does it solve the problem? Is the UX intuitive?)* | 5 | The project solves the problem and it's very intuitive. |
 
 ---
 
